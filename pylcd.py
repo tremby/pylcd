@@ -19,6 +19,7 @@ class Pylcd:
 	_verbose = False
 
 	_screens = {}
+	_widgets = []
 
 	def getsuccess(self):
 		"""Get data from LCDd until a success or error message is received
@@ -167,7 +168,7 @@ class Pylcd:
 		if self._verbose: print "Switching the heartbeat on or off"
 		val = "off"
 		if on: val = "on"
-		if not self.send("screen_set screen -heartbeat %s" % val):
+		if not self.send("screen_set %s -heartbeat %s" % (screen, val)):
 			raise Exception("Could not switch off heartbeat")
 
 	def priority(self, screen, priority):
